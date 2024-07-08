@@ -12,6 +12,7 @@ import time #Para hacer los tiempos de espera cuando se cierra sesión
 
 def menu_inicial(): ##LISTO
     os.system("cls")
+    opcion= 0
     print("#### Bienvenido(a) al sistema PrivGym 2.0 #####")
     print(" Elija una de las siguientes opciones")
     print("- [1] iniciar Sesión")
@@ -172,6 +173,7 @@ def listar_datos(): ##LISTO
         print("#### LISTA DE REGISTROS ####")
         for i in lista:
             print(i)
+        os.system('pause')
     menu_acciones()
 
 def estadistica(): ##LISTO
