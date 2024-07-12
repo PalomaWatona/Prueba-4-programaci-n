@@ -11,39 +11,55 @@ import time #Para hacer los tiempos de espera cuando se cierra sesión
 #- gestor     pass: 321      Permisos: 1.Estadística  2.Cerrar Sesión
 
 def menu_inicial(): ##LISTO
-    os.system("cls")
-    opcion= 0
-    print("#### Bienvenido(a) al sistema PrivGym 2.0 #####")
-    print(" Elija una de las siguientes opciones")
-    print("- [1] iniciar Sesión")
-    print("- [2] Salir")
-    opcion = int(input(": "))
-
-    if opcion == 1:
-        print("opcion 1")
-        iniciar_sesion()
-    
-    elif opcion == 2:
-        print("opcion 2")
-        salir()
-    
-    else:
+    try:
         os.system("cls")
-        print("### Opción no válida ###")
+        opcion= 0
+        print("#### Bienvenido(a) al sistema PrivGym 2.0 #####")
+        print(" Elija una de las siguientes opciones")
+        print("- [1] iniciar Sesión")
+        print("- [2] Salir")
+        opcion = int(input(": "))
+
+        if opcion == 1:
+            print("opcion 1")
+            iniciar_sesion()
+        
+        elif opcion == 2:
+            print("opcion 2")
+            salir()
+        
+        else:
+            os.system("cls")
+            print("### Opción no válida ###")
+            os.system("pause")
+            menu_inicial()
+    except:
+        print("### La opcion debe ser numerica ###")
+        print("### Error al ingresar la opcion, vuelve a intentar' ###")
         os.system("pause")
         menu_inicial()
 
+
 def iniciar_sesion(): ##FALTA HACER QUE NO SE PUEDA VER LA CONTRASEÑA
     global usuario
-    os.system("cls")
-    print("#### Menú de inicio de sesión ####")
-    usuario = input("Ingrese su usuario: ")
-    os.system("cls")
-    contraseña = getpass.getpass("Ingrese su contraseña: ")
-    os.system("cls")
-    print("Validando datos...")
-    time.sleep(3)
-    os.system("cls")
+    while True:
+        try:
+            os.system("cls")
+            print("#### Menú de inicio de sesión ####")
+            usuario = input("Ingrese su usuario: ")
+            if len(usuario.strip()) ==0:
+                print("El nombre de usuario no debe quedar en vacio")
+                os.system("cls")
+            else:
+                contraseña = getpass.getpass("Ingrese su contraseña: ")
+                os.system("cls")
+                print("Validando datos...")
+                time.sleep(3)
+                os.system("cls")
+                break
+        except:
+                print("### Ingreso de datos incorrectos ### ")
+                os.system("pause")
 
     if (usuario == "admin" and contraseña == "inacap"):
         #print("Ha iniciado sesión como administrador")
@@ -69,56 +85,79 @@ def menu_acciones(): ##LISTO
     os.system("cls")
 
     if usuario == "admin":
-        opcion=0
-        print("#### MENÚ ADMINISTRADOR ####")
-        print("- [1]Registrar")
-        print("- [2]Listar")
-        print("- [3]Estadística")
-        print("- [4]Cerrar Sesión")
-        opcion = int(input(": "))
-        if opcion == 1:
-            registrar_datos()
-        elif opcion == 2:
-            listar_datos()
-        elif opcion == 3:
-            estadistica()
-        elif opcion == 4:
-            cerrar_sesion()
-        else:
-            os.system("cls")
-            print("Opción incorrecta en MENÚ ADMINISTRADOR...")
-            time.sleep(2)
-            menu_acciones()
+        opcion= 0
+        while True:
+            try:
+                os.system("cls")
+                print("#### MENÚ ADMINISTRADOR ####")
+                print("- [1]Registrar")
+                print("- [2]Listar")
+                print("- [3]Estadística")
+                print("- [4]Cerrar Sesión")
+                opcion = int(input(": "))
+                if opcion == 1:
+                    registrar_datos()
+                elif opcion == 2:
+                    listar_datos()
+                elif opcion == 3:
+                    estadistica()
+                elif opcion == 4:
+                    cerrar_sesion()
+                    break
+                else:
+                    os.system("cls")
+                    print("Opción incorrecta en MENÚ ADMINISTRADOR...")
+                    time.sleep(2)
+                    menu_acciones()
+            except:
+                    print("### La opcion debe ser numerica ###")
+                    print("### Error al ingresar la opcion, vuelve a intentar ###")
+                    os.system("pause")
         
     elif usuario == "operador":
-        print("#### MENÚ OPERADOR ####")
-        print("- [1]Listar")
-        print("- [2]Cerra Sesión")
-        opcion = int(input(": "))
-        if opcion == 1:
-            listar_datos()
-        elif opcion == 2:
-            cerrar_sesion()
-        else:
-            os.system("cls")
-            print("Opción incorrecta en MENÚ OPERADOR...")
-            time.sleep(2)
-            menu_acciones()
+        while True:
+            try:
+                os.system('cls')
+                print("#### MENÚ OPERADOR ####")
+                print("- [1]Listar")
+                print("- [2]Cerra Sesión")
+                opcion = int(input(": "))
+                if opcion == 1:
+                    listar_datos()
+                elif opcion == 2:
+                    cerrar_sesion()
+                    break
+                else:
+                    os.system("cls")
+                    print("Opción incorrecta en MENÚ OPERADOR...")
+                    time.sleep(2)
+                    menu_acciones()
+            except:
+                    print("### La opcion debe ser numerica ###")
+                    print("### Error al ingresar la opcion, vuelve a intentar ###")
+                    os.system("pause")
 
     elif usuario == "gestor":
-        print("#### MENÚ GESTOR ####")
-        print("- [1]Estadística")
-        print("- [2]Cerrar Sesión")
-        opcion = int(input(": "))
-        if opcion == 1:
-            estadistica()
-        elif opcion == 2:
-            cerrar_sesion()
-        else:
-            os.system("cls")
-            print("Opción incorrecta en MENÚ GESTOR...")
-            time.sleep(2)
-            menu_acciones()
+        while True:
+            try:
+                os.system('cls')
+                print("#### MENÚ GESTOR ####")
+                print("- [1]Estadística")
+                print("- [2]Cerrar Sesión")
+                opcion = int(input(": "))
+                if opcion == 1:
+                    estadistica()
+                elif opcion == 2:
+                    cerrar_sesion()
+                else:
+                    os.system("cls")
+                    print("Opción incorrecta en MENÚ GESTOR...")
+                    time.sleep(2)
+                    menu_acciones()
+            except:
+                    print("### La opcion debe ser numerica ###")
+                    print("### Error al ingresar la opcion, vuelve a intentar ###")
+                    os.system("pause")
 
 def cerrar_sesion(): ##LISTO
     os.system("cls")
@@ -138,30 +177,38 @@ def cerrar_sesion(): ##LISTO
     menu_inicial()
 
 def registrar_datos(): ##LISTO
-    os.system("cls")
-    diccionario = dict()
-    print("#### Bienvenido al Menú de Registro ####")
-    os.system("pause")
-    os.system("cls")
-    identificador = input("Ingresa tu Identificador: ")
-    os.system("cls")
-    nombre_socio = input("Ingresa tu Nómbre: ")
-    os.system("cls")
-    objetivos = input("Ingresa tus Objetivos: ")
-    os.system("cls")
-    plan = input("Ingresa tu Plan: ")
-    os.system("cls")
-    fecha_inscripcion = input("Ingresa tu Fecha de Inscripción: ")
-    os.system("cls")
-    mensualidad = int(input("Ingresa la Mensualidad: $"))
-    if mensualidad < 0:
-        os.system("cls")
-        mensualidad = int(input("Error al ingresar un valor válido para la mensualidad, volver a ingresarlo: "))
-
-    ##FALTA HACER LA VALIDACIÓN DE LA MENSUALIDAD
-    diccionario = {"identificador": identificador, "nombre": nombre_socio, "objetivos": objetivos, "plan": plan, "fecha_inscripcion": fecha_inscripcion, "mensualidad": mensualidad}
-    lista.append(diccionario)
-    menu_acciones()
+    while True:
+        try:
+            os.system("cls")
+            diccionario = dict()
+            print("#### Bienvenido al Menú de Registro ####")
+            os.system("pause")
+            os.system("cls")
+            identificador = input("Ingresa tu Identificador: ")
+            os.system("cls")
+            nombre_socio = input("Ingresa tu Nómbre: ")
+            os.system("cls")
+            objetivos = input("Ingresa tus Objetivos: ")
+            os.system("cls")
+            plan = input("Ingresa tu Plan: ")
+            os.system("cls")
+            fecha_inscripcion = input("Ingresa tu Fecha de Inscripción: ")
+            os.system("cls")
+            mensualidad = int(input("Ingresa la Mensualidad: $"))
+            if mensualidad < 0:
+                os.system("cls")
+                mensualidad = int(input("Error al ingresar un valor válido para la mensualidad, volver a ingresarlo: "))
+            ##FALTA HACER LA VALIDACIÓN DE LA MENSUALIDAD
+            else:
+                print(f"Se ha ingresado correctamente la mensualidad: '{mensualidad}'")
+                diccionario = {"identificador": identificador, "nombre": nombre_socio, "objetivos": objetivos, "plan": plan, "fecha_inscripcion": fecha_inscripcion, "mensualidad": mensualidad}
+                lista.append(diccionario)
+                os.system("pause")
+                break
+            menu_acciones()
+        except:
+                print("### Error al ingresar los datos, vuelve a intentar ###")
+                os.system("pause")
 
 def listar_datos(): ##LISTO
     os.system("cls")
